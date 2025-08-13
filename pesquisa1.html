@@ -1,0 +1,92 @@
+
+<style>
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+.container { max-width: 1100px; margin: 0 auto; padding: 16px; }
+h2 { margin: 8px 0 0 0; }
+table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+th, td { padding: 8px 10px; border: 1px solid #ddd; vertical-align: top; }
+th { cursor: pointer; background: #f6f6f6; position: sticky; top: 0; }
+.small { color: #666; font-size: 12px; }
+th.asc::after { content: " ▲"; }
+th.desc::after { content: " ▼"; }
+</style>
+
+<script>
+function sortTable(colIndex, numeric=false) {
+  const table = document.getElementById('outcomesTable');
+  const tbody = table.tBodies[0];
+  const ths = table.tHead.rows[0].cells;
+
+  // Determine direction (toggle)
+  let dir = ths[colIndex].dataset.dir === 'asc' ? 'desc' : 'asc';
+
+  // Clear indicators
+  Array.from(ths).forEach(th => { th.dataset.dir=''; th.classList.remove('asc','desc'); });
+
+  // Get rows
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+
+  const getVal = (tr) => {
+    const td = tr.cells[colIndex];
+    if (numeric) {
+      const val = td.getAttribute('data-num');
+      return val ? parseFloat(val) : parseFloat(td.textContent.replace(',', '.'));
+    } else {
+      return td.textContent.toLowerCase();
+    }
+  };
+
+  rows.sort((a, b) => {
+    const A = getVal(a);
+    const B = getVal(b);
+    if (A < B) return dir === 'asc' ? -1 : 1;
+    if (A > B) return dir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  // Re-append in sorted order
+  rows.forEach(r => tbody.appendChild(r));
+
+  // Set indicator
+  ths[colIndex].dataset.dir = dir;
+  ths[colIndex].classList.add(dir);
+}
+</script>
+
+<div class='container'>
+  <div><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.4.1.min.js"></script>                <div id="5ba93e45-6c67-42f4-855e-33517e145437" class="plotly-graph-div" style="height:900px; width:900px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("5ba93e45-6c67-42f4-855e-33517e145437")) {                    Plotly.newPlot(                        "5ba93e45-6c67-42f4-855e-33517e145437",                        [{"customdata":[["Reduzir os custos de frete por pedido.",13.02],["Reduzir o tempo no processo de pagamento e compra de etiquetas.",12.34],["Reduzir o tempo de resolução de problemas de entrega.",14.239999999999998],["Reduzir o tempo de emissão de nota fiscal e etiquetas em pedidos de diferentes canais.",12.399999999999999],["Reduzir a ocorrência de clientes sem informação sobre a entrega.",13.440000000000001],["Minimizar o tempo gasto na pesquisa de opções de frete.",13.84],["Minimizar o tempo gasto com verificação manual de rastreamento.",12.63],["Minimizar o impacto financeiro de extravios e avarias.",12.899999999999999],["Minimizar erros na geração de documentos devido a inconsistência de dados.",12.940000000000001],["Melhorar a proatividade na identificação e resolução de problemas de entrega.",12.599999999999998],["Melhorar a precisão do cálculo de frete.",13.009999999999998],["Melhorar a eficiência na gestão de logística reversa.",13.16],["Diminuir o tempo para obter cotações prévias.",12.6],["Diminuir a complexidade na criação de etiquetas avulsas.",12.89],["Aumentar a transparência sobre o status e localização dos pedidos.",12.89],["Aumentar a satisfação do cliente através de suporte proativo.",12.379999999999999],["Aumentar a praticidade na emissão de etiquetas.",11.98],["Aumentar a competitividade dos preços de envio.",11.52]],"hovertemplate":"<b>%{customdata[0]}</b><br>Importância: %{x:.2f}<br>Satisfação: %{y:.2f}<br>Opportunity Score: %{customdata[1]:.2f}<extra></extra>","marker":{"size":10},"mode":"markers+text","text":["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"],"textposition":"top center","type":"scatter","x":[9.59,9.59,9.54,9.54,9.3,9.27,9.14,9.11,8.97,8.95,8.95,8.92,8.92,8.89,8.81,8.76,8.68,8.57],"y":[6.16,6.84,4.84,6.68,5.16,4.7,5.65,5.32,5.0,5.3,4.89,4.68,5.24,4.89,4.73,5.14,5.38,5.62]},{"hoverinfo":"skip","line":{"dash":"solid"},"mode":"lines","showlegend":false,"type":"scatter","x":[0,10],"y":[0,10]},{"hoverinfo":"skip","line":{"dash":"solid"},"mode":"lines","showlegend":false,"type":"scatter","x":[5,10],"y":[0,10]}],                        {"annotations":[{"showarrow":false,"text":"overserved","x":2.5,"y":7.5},{"showarrow":false,"text":"underserved","x":6.5,"y":2},{"showarrow":false,"text":"appropriately<br>served","x":3.5,"y":3},{"align":"right","showarrow":false,"text":"Pontos numerados seguem a ordem (1–18).","x":9.8,"xref":"x","y":0.5,"yref":"y"}],"height":900,"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"text":"Opportunity Scores - Modelo Importância vs. Satisfação"},"width":900,"xaxis":{"range":[0,10],"title":{"text":"Importance"},"zeroline":false},"yaxis":{"range":[0,10],"title":{"text":"Satisfaction"},"zeroline":false}},                        {"responsive": true}                    )                };                            </script>        </div></div>
+  <h2>Lista de Outcomes</h2>
+  <div class="small">Clique no cabeçalho para ordenar.</div>
+  <table id="outcomesTable">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0, true)">#</th>
+        <th onclick="sortTable(1, false)">Outcome</th>
+        <th onclick="sortTable(2, true)">Satisfação</th>
+        <th onclick="sortTable(3, true)">Importância</th>
+        <th onclick="sortTable(4, true)">Opportunity Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td data-num='1'>1</td><td>Reduzir os custos de frete por pedido.</td><td data-num='6.16'>6.16</td><td data-num='9.59'>9.59</td><td data-num='13.02'>13.02</td></tr>
+<tr><td data-num='2'>2</td><td>Reduzir o tempo no processo de pagamento e compra de etiquetas.</td><td data-num='6.84'>6.84</td><td data-num='9.59'>9.59</td><td data-num='12.34'>12.34</td></tr>
+<tr><td data-num='3'>3</td><td>Reduzir o tempo de resolução de problemas de entrega.</td><td data-num='4.84'>4.84</td><td data-num='9.54'>9.54</td><td data-num='14.24'>14.24</td></tr>
+<tr><td data-num='4'>4</td><td>Reduzir o tempo de emissão de nota fiscal e etiquetas em pedidos de diferentes canais.</td><td data-num='6.68'>6.68</td><td data-num='9.54'>9.54</td><td data-num='12.40'>12.40</td></tr>
+<tr><td data-num='5'>5</td><td>Reduzir a ocorrência de clientes sem informação sobre a entrega.</td><td data-num='5.16'>5.16</td><td data-num='9.30'>9.30</td><td data-num='13.44'>13.44</td></tr>
+<tr><td data-num='6'>6</td><td>Minimizar o tempo gasto na pesquisa de opções de frete.</td><td data-num='4.70'>4.70</td><td data-num='9.27'>9.27</td><td data-num='13.84'>13.84</td></tr>
+<tr><td data-num='7'>7</td><td>Minimizar o tempo gasto com verificação manual de rastreamento.</td><td data-num='5.65'>5.65</td><td data-num='9.14'>9.14</td><td data-num='12.63'>12.63</td></tr>
+<tr><td data-num='8'>8</td><td>Minimizar o impacto financeiro de extravios e avarias.</td><td data-num='5.32'>5.32</td><td data-num='9.11'>9.11</td><td data-num='12.90'>12.90</td></tr>
+<tr><td data-num='9'>9</td><td>Minimizar erros na geração de documentos devido a inconsistência de dados.</td><td data-num='5.00'>5.00</td><td data-num='8.97'>8.97</td><td data-num='12.94'>12.94</td></tr>
+<tr><td data-num='10'>10</td><td>Melhorar a proatividade na identificação e resolução de problemas de entrega.</td><td data-num='5.30'>5.30</td><td data-num='8.95'>8.95</td><td data-num='12.60'>12.60</td></tr>
+<tr><td data-num='11'>11</td><td>Melhorar a precisão do cálculo de frete.</td><td data-num='4.89'>4.89</td><td data-num='8.95'>8.95</td><td data-num='13.01'>13.01</td></tr>
+<tr><td data-num='12'>12</td><td>Melhorar a eficiência na gestão de logística reversa.</td><td data-num='4.68'>4.68</td><td data-num='8.92'>8.92</td><td data-num='13.16'>13.16</td></tr>
+<tr><td data-num='13'>13</td><td>Diminuir o tempo para obter cotações prévias.</td><td data-num='5.24'>5.24</td><td data-num='8.92'>8.92</td><td data-num='12.60'>12.60</td></tr>
+<tr><td data-num='14'>14</td><td>Diminuir a complexidade na criação de etiquetas avulsas.</td><td data-num='4.89'>4.89</td><td data-num='8.89'>8.89</td><td data-num='12.89'>12.89</td></tr>
+<tr><td data-num='15'>15</td><td>Aumentar a transparência sobre o status e localização dos pedidos.</td><td data-num='4.73'>4.73</td><td data-num='8.81'>8.81</td><td data-num='12.89'>12.89</td></tr>
+<tr><td data-num='16'>16</td><td>Aumentar a satisfação do cliente através de suporte proativo.</td><td data-num='5.14'>5.14</td><td data-num='8.76'>8.76</td><td data-num='12.38'>12.38</td></tr>
+<tr><td data-num='17'>17</td><td>Aumentar a praticidade na emissão de etiquetas.</td><td data-num='5.38'>5.38</td><td data-num='8.68'>8.68</td><td data-num='11.98'>11.98</td></tr>
+<tr><td data-num='18'>18</td><td>Aumentar a competitividade dos preços de envio.</td><td data-num='5.62'>5.62</td><td data-num='8.57'>8.57</td><td data-num='11.52'>11.52</td></tr>
+    </tbody>
+  </table>
+</div>
